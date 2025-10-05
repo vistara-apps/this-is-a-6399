@@ -107,17 +107,29 @@ const VaultCard = ({ vault, portfolioData, setPortfolioData }) => {
             <span>Deposit & Earn</span>
             <Zap className="w-4 h-4" />
           </button>
-          <button className="w-full bg-surface border border-text-muted/20 hover:border-primary/30 text-text font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
-            <span>View Details</span>
-            <ExternalLink className="w-4 h-4" />
-          </button>
+          <div className="grid grid-cols-2 gap-2">
+            <button className="bg-surface border border-text-muted/20 hover:border-primary/30 text-text font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+              <span>Withdraw</span>
+            </button>
+            <button className="bg-surface border border-text-muted/20 hover:border-primary/30 text-text font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2">
+              <span>Details</span>
+              <ExternalLink className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Last Rebalance */}
         <div className="mt-4 pt-4 border-t border-text-muted/10">
-          <div className="flex items-center justify-between text-xs text-text-muted">
+          <div className="flex items-center justify-between text-xs text-text-muted mb-2">
             <span>Last rebalanced: 2h ago</span>
             <span>Next check: 4h</span>
+          </div>
+          <div className="flex items-center justify-between text-xs">
+            <div className="flex items-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></div>
+              <span className="text-success">Auto-compound active</span>
+            </div>
+            <span className="text-text-muted">Gas: ~$0.001</span>
           </div>
         </div>
       </motion.div>
