@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useBalance } from 'wagmi';
-import { TrendingUp, Zap } from 'lucide-react';
+import { TrendingUp, Zap, AlertTriangle } from 'lucide-react';
+import EmergencyExit from './EmergencyExit';
 
-const Header = () => {
+const Header = ({ portfolioData, setPortfolioData, vaults }) => {
   const { address, isConnected } = useAccount();
+  const [showEmergencyExit, setShowEmergencyExit] = useState(false);
   const { data: balance } = useBalance({
     address,
     chainId: 196, // X Layer
@@ -49,6 +51,17 @@ const Header = () => {
               </div>
             )}
 
+            {/* Emergency Exit Button */}
+            {isConnected && portfolioData?.currentBalance > 0 && (
+              <button
+                onClick={() => setShowEmergencyExit(true)}
+                className="hidden md:flex items-center space-x-2 bg-error/10 border border-error/30 hover:bg-error/20 text-error px-3 py-1.5 rounded-lg transition-colors text-sm font-medium"
+              >
+                <AlertTriangle className="w-4 h-4" />
+                <span>Emergency Exit</span>
+              </button>
+            )}
+
             {/* Connect Wallet Button */}
             <div className="flex items-center">
               <ConnectButton />
@@ -56,6 +69,14 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <EmergencyExit
+        isOpen={showEmergencyExit}
+        onClose={() => setShowEmergencyExit(false)}
+        portfolioData={portfolioData}
+        setPortfolioData={setPortfolioData}
+        vaults={vaults}
+      />
     </header>
   );
 };

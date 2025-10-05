@@ -4,6 +4,8 @@ import Header from './components/Header';
 import VaultGrid from './components/VaultGrid';
 import Portfolio from './components/Portfolio';
 import Analytics from './components/Analytics';
+import RiskManagement from './components/RiskManagement';
+import AutoCompoundEngine from './components/AutoCompoundEngine';
 import { useAccount } from 'wagmi';
 
 function App() {
@@ -83,7 +85,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg gradient-bg">
-      <Header />
+      <Header 
+        portfolioData={portfolioData}
+        setPortfolioData={setPortfolioData}
+        vaults={vaults}
+      />
       
       <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
         {/* Navigation Tabs */}
@@ -92,6 +98,8 @@ function App() {
             { id: 'vaults', label: 'Vaults', icon: '🏦' },
             { id: 'portfolio', label: 'Portfolio', icon: '📊' },
             { id: 'analytics', label: 'Analytics', icon: '📈' },
+            { id: 'compound', label: 'Auto-Compound', icon: '🔄' },
+            { id: 'risk', label: 'Risk Management', icon: '🛡️' },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -130,6 +138,12 @@ function App() {
           )}
           {activeTab === 'analytics' && (
             <Analytics vaults={vaults} />
+          )}
+          {activeTab === 'compound' && (
+            <AutoCompoundEngine vaults={vaults} />
+          )}
+          {activeTab === 'risk' && (
+            <RiskManagement vaults={vaults} />
           )}
         </motion.div>
 

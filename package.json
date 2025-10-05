@@ -1,8 +1,12 @@
 {
   "name": "yieldlayer",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Auto-compounding DeFi yields on X Layer with OKB rewards",
+  "keywords": ["defi", "yield-farming", "x-layer", "okb", "auto-compound", "web3"],
+  "author": "YieldLayer Team",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
