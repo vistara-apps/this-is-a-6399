@@ -2,6 +2,7 @@ import React from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useBalance } from 'wagmi';
 import { TrendingUp, Zap } from 'lucide-react';
+import NetworkSwitcher from './NetworkSwitcher';
 
 const Header = () => {
   const { address, isConnected } = useAccount();
@@ -32,11 +33,9 @@ const Header = () => {
 
           {/* Network Info & Wallet */}
           <div className="flex items-center space-x-4">
-            {/* X Layer Badge */}
-            <div className="hidden sm:flex items-center space-x-2 bg-okb-blue/10 border border-okb-blue/30 rounded-lg px-3 py-1.5">
-              <div className="w-2 h-2 bg-okb-blue rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-okb-blue">X Layer</span>
-              <span className="text-xs text-text-muted">196</span>
+            {/* Network Switcher */}
+            <div className="hidden sm:block">
+              <NetworkSwitcher />
             </div>
 
             {/* Balance Display */}

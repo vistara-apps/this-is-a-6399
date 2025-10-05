@@ -21,10 +21,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-// Define X Layer network
+// Define X Layer network with enhanced configuration
 const xLayer = {
   id: 196,
-  name: 'X Layer',
+  name: 'X Layer Mainnet',
   network: 'xlayer',
   nativeCurrency: {
     decimals: 18,
@@ -38,6 +38,7 @@ const xLayer = {
   blockExplorers: {
     default: { name: 'X Layer Explorer', url: 'https://www.okx.com/explorer/xlayer' },
   },
+  testnet: false,
 }
 
 const config = getDefaultConfig({

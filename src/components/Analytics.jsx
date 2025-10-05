@@ -238,7 +238,7 @@ const Analytics = ({ vaults }) => {
       >
         <h3 className="text-xl font-semibold mb-6">X Layer Optimization Benefits</h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div className="text-center">
             <div className="text-3xl font-bold text-okb-blue mb-2">$0.001</div>
             <div className="text-sm text-text-muted">Avg transaction cost</div>
@@ -256,7 +256,64 @@ const Analytics = ({ vaults }) => {
           </div>
         </div>
 
-        <div className="mt-6 bg-bg/50 rounded-lg p-4">
+        {/* Gas Savings Calculator */}
+        <div className="bg-bg/50 rounded-lg p-4 mb-6">
+          <h4 className="font-semibold mb-3">Gas Savings Calculator</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="text-sm text-text-muted mb-2">If you used Ethereum L1:</div>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Daily compound (365x):</span>
+                  <span className="text-error">$18,250</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Weekly rebalance (52x):</span>
+                  <span className="text-error">$2,600</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Emergency exits (2x):</span>
+                  <span className="text-error">$100</span>
+                </div>
+                <div className="flex justify-between font-semibold border-t border-text-muted/20 pt-2">
+                  <span>Total Annual Gas:</span>
+                  <span className="text-error">$20,950</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="text-sm text-text-muted mb-2">On X Layer:</div>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Daily compound (365x):</span>
+                  <span className="text-okb-blue">$0.73</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>4x daily rebalance (1460x):</span>
+                  <span className="text-okb-blue">$1.46</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Emergency exits (2x):</span>
+                  <span className="text-okb-blue">$0.004</span>
+                </div>
+                <div className="flex justify-between font-semibold border-t border-text-muted/20 pt-2">
+                  <span>Total Annual Gas:</span>
+                  <span className="text-success">$2.19</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 p-3 bg-success/5 border border-success/20 rounded-lg text-center">
+            <div className="text-lg font-bold text-success mb-1">
+              You save $20,947.81 per year (99.99%)
+            </div>
+            <div className="text-xs text-text-muted">
+              This enables profitable auto-compounding even for small deposits
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-bg/50 rounded-lg p-4">
           <h4 className="font-semibold mb-3">Daily Operations Enabled by Low Gas Costs</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div className="flex items-center space-x-2">

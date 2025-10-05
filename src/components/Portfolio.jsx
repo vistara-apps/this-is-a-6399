@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, DollarSign, Zap, Shield, Download } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import EmergencyExit from './EmergencyExit';
+import TransactionHistory from './TransactionHistory';
 
-const Portfolio = ({ portfolioData, vaults }) => {
+const Portfolio = ({ portfolioData, setPortfolioData, vaults }) => {
   // Mock performance data
   const performanceData = [
     { date: '2024-01-01', value: 10000, apy: 12.5 },
@@ -24,9 +26,18 @@ const Portfolio = ({ portfolioData, vaults }) => {
       {/* Header */}
       <div className="text-center">
         <h2 className="text-3xl font-bold mb-4">My Portfolio</h2>
-        <p className="text-text-muted max-w-2xl mx-auto">
+        <p className="text-text-muted max-w-2xl mx-auto mb-6">
           Track your earnings, gas savings, and performance across all vault positions
         </p>
+        
+        {/* Emergency Exit Button */}
+        <div className="flex justify-center mb-6">
+          <EmergencyExit 
+            portfolioData={portfolioData}
+            setPortfolioData={setPortfolioData}
+            vaults={vaults}
+          />
+        </div>
       </div>
 
       {/* Portfolio Summary Cards */}
@@ -227,35 +238,7 @@ const Portfolio = ({ portfolioData, vaults }) => {
         transition={{ delay: 0.7 }}
         className="bg-surface border border-text-muted/20 rounded-xl p-6"
       >
-        <h3 className="text-xl font-semibold mb-6">Recent Transactions</h3>
-        
-        <div className="space-y-3">
-          {[
-            { type: 'deposit', amount: '$2,500', vault: 'OKB Stable Yield', time: '2 hours ago', hash: '0x1234...5678' },
-            { type: 'compound', amount: '$42.18', vault: 'Auto-Compound DEX', time: '1 day ago', hash: '0xabcd...efgh' },
-            { type: 'rebalance', amount: '$5,000', vault: 'OKB Stable Yield', time: '3 days ago', hash: '0x9876...5432' },
-          ].map((tx, index) => (
-            <div key={index} className="flex items-center justify-between py-3 border-b border-text-muted/10 last:border-b-0">
-              <div className="flex items-center space-x-3">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                  tx.type === 'deposit' ? 'bg-primary/10 text-primary' :
-                  tx.type === 'compound' ? 'bg-success/10 text-success' :
-                  'bg-okb-blue/10 text-okb-blue'
-                }`}>
-                  {tx.type === 'deposit' ? '↓' : tx.type === 'compound' ? '🔄' : '⚖️'}
-                </div>
-                <div>
-                  <div className="font-medium capitalize">{tx.type}</div>
-                  <div className="text-sm text-text-muted">{tx.vault}</div>
-                </div>
-              </div>
-              <div className="text-right">
-                <div className="font-medium">{tx.amount}</div>
-                <div className="text-xs text-text-muted">{tx.time}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <TransactionHistory portfolioData={portfolioData} />
       </motion.div>
     </div>
   );

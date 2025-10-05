@@ -48,7 +48,15 @@ const VaultCard = ({ vault, portfolioData, setPortfolioData }) => {
         {/* APY Display */}
         <div className="mb-6">
           <div className="flex items-center space-x-2 mb-2">
-            <span className="text-3xl font-bold text-primary">{vault.currentAPY}%</span>
+            <motion.span 
+              key={vault.currentAPY}
+              initial={{ scale: 1.1, color: '#8b5cf6' }}
+              animate={{ scale: 1, color: '#8b5cf6' }}
+              transition={{ duration: 0.3 }}
+              className="text-3xl font-bold text-primary"
+            >
+              {vault.currentAPY}%
+            </motion.span>
             <div className="flex items-center space-x-1">
               <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
               <span className="text-xs text-success font-medium">LIVE APY</span>
@@ -56,6 +64,18 @@ const VaultCard = ({ vault, portfolioData, setPortfolioData }) => {
           </div>
           <div className="text-sm text-text-muted">
             Performance fee: {vault.performanceFee}% on profits
+          </div>
+          
+          {/* APY Trend Indicator */}
+          <div className="flex items-center space-x-2 mt-2">
+            <div className="flex items-center space-x-1">
+              <div className="w-3 h-3 bg-success/20 rounded flex items-center justify-center">
+                <div className="w-1 h-1 bg-success rounded-full"></div>
+              </div>
+              <span className="text-xs text-success">+2.3% (24h)</span>
+            </div>
+            <div className="w-px h-3 bg-text-muted/20"></div>
+            <span className="text-xs text-text-muted">Trending up</span>
           </div>
         </div>
 
@@ -116,8 +136,35 @@ const VaultCard = ({ vault, portfolioData, setPortfolioData }) => {
         {/* Last Rebalance */}
         <div className="mt-4 pt-4 border-t border-text-muted/10">
           <div className="flex items-center justify-between text-xs text-text-muted">
-            <span>Last rebalanced: 2h ago</span>
-            <span>Next check: 4h</span>
+            <div className="flex items-center space-x-1">
+              <div className="w-1.5 h-1.5 bg-okb-blue rounded-full animate-pulse"></div>
+              <span>Last rebalanced: 2h ago</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <span>Next check: 4h</span>
+              <div className="w-1 h-1 bg-text-muted/50 rounded-full"></div>
+            </div>
+          </div>
+          
+          {/* Activity Indicator */}
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="flex space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: i < 3 ? 1 : 0.3 }}
+                    transition={{ delay: i * 0.1, duration: 0.3 }}
+                    className="w-1 h-2 bg-success rounded-full"
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-success">High Activity</span>
+            </div>
+            <div className="text-xs text-text-muted">
+              {vault.tvl > 1000000 ? '🔥 Popular' : '⭐ Growing'}
+            </div>
           </div>
         </div>
       </motion.div>

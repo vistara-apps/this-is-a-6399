@@ -4,6 +4,9 @@ import Header from './components/Header';
 import VaultGrid from './components/VaultGrid';
 import Portfolio from './components/Portfolio';
 import Analytics from './components/Analytics';
+import RealTimeUpdates from './components/RealTimeUpdates';
+import RiskMonitor from './components/RiskMonitor';
+import AutoCompoundEngine from './components/AutoCompoundEngine';
 import { useAccount } from 'wagmi';
 
 function App() {
@@ -18,7 +21,7 @@ function App() {
     gasSavings: 0,
   });
 
-  const [vaults] = useState([
+  const [vaults, setVaults] = useState([
     {
       id: 1,
       name: 'OKB Stable Yield',
@@ -85,6 +88,25 @@ function App() {
     <div className="min-h-screen bg-bg gradient-bg">
       <Header />
       
+      {/* Real-time Updates */}
+      {isConnected && (
+        <RealTimeUpdates vaults={vaults} setVaults={setVaults} />
+      )}
+      
+      {/* Risk Monitoring */}
+      {isConnected && (
+        <RiskMonitor vaults={vaults} portfolioData={portfolioData} />
+      )}
+      
+      {/* Auto-Compound Engine */}
+      {isConnected && portfolioData.currentBalance > 0 && (
+        <AutoCompoundEngine 
+          vaults={vaults} 
+          portfolioData={portfolioData}
+          setPortfolioData={setPortfolioData}
+        />
+      )}
+      
       <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
         {/* Navigation Tabs */}
         <div className="flex space-x-8 mb-8 border-b border-text-muted/20">
@@ -125,6 +147,7 @@ function App() {
           {activeTab === 'portfolio' && (
             <Portfolio 
               portfolioData={portfolioData}
+              setPortfolioData={setPortfolioData}
               vaults={vaults}
             />
           )}
